@@ -85,10 +85,33 @@ set_xlabel, set_ylabel은 x축, y축의 label 출력
 legend는 plot() 함수의 label param을 이용하여 범례를 생성
 """
 
-fig = plt.figure()
-print(type(fig))
+# fig = plt.figure()
+# print(type(fig))
 # <class 'matplotlib.figure.Figure'>
 # fig는 Figure instance
 
-ax = fig.add_subplot(1, 1, 1)
-print(type(ax))
+# ax = fig.add_subplot(1, 1, 1)
+# print(type(ax))
+# <class 'matplotlib.axes._subplots.AxesSubplot'>
+# ax는 AxesSubplot instance
+# 이 상태에서 plt.show()를 하면 빈 화면이 출력된다.
+
+fig, ax_list = plt.subplots(2, 2)
+print(type(fig))
+print(type(ax_list))
+ax_list[0][0].plot([1, 2, 3, 4])
+plt.show()
+"""
+<class 'matplotlib.figure.Figure'>
+<class 'numpy.ndarray'>
+fig는 Figure instance
+ax_list는 numpy object이고 AxesSubplot들이 들어있다.
+ax_list[0][0]을 설정하면 4개로 분할된 화면의 좌상단에 그래프가 그려진다.
+"""
+
+"""
+Figure 객체나 AxesSubplot 객체를 명시적으로 생성하지 않아도
+plt.plot 함수를 이용하여 그래프를 그릴 수 있다.
+plt.plot 함수는 가장 최근에 생성된 Figure 객체를 찾고
+해당 Figure 객체내의 AxesSubplot에 그래프를 그린다.
+"""
