@@ -59,10 +59,9 @@ class PyMon:
             return True
 
     def update_buy_list(self, buy_list):
-        f = open(os.path.join(path, "new_buy_list.txt"), "wt")
-        for code in buy_list:
-            f.writelines("매수;", code, ";시장가;10;0;매수전")
-        f.close()
+        with open(os.path.join(path, "new_buy_list.txt"), "wt") as f:
+            for code in buy_list:
+                f.writelines("매수;", code, ";시장가;10;0;매수전")
 
     def run(self):
         buy_list = []
@@ -72,12 +71,11 @@ class PyMon:
         # num = len(self.kosdaq_codes)
         num = len(check_code_list)
 
-        # for i, code in enumerate(self.kosdaq_codes):
         append = buy_list.append
         for i, code in enumerate(check_code_list):
-            # print(i, '/', num)
             print(f'{i}: {code}/{num}')
             if self.check_speedy_rising_volume(code):
+                print(f'급등주 확인 {i}: {code}/{num}')
                 append(code)
 
         self.update_buy_list(buy_list)
