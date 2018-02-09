@@ -1,5 +1,5 @@
-import time
 import os
+import time
 
 from pywinauto import application
 from pywinauto import timings
